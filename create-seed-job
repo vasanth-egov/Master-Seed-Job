@@ -19,7 +19,7 @@ node {
 		if (folder == null) {
 		  println "Creating Folder -- ${config.moduleName} ..!!"
 		  def jenkinsInstance = Jenkins.getInstance()
-		  folder = jenkinsInstance.createProject(com.cloudbees.hudson.Folder.class, "${config.moduleName}")
+		  folder = jenkinsInstance.createProject(Folder.class, "${config.moduleName}")
 		}
 		// Job Create
 		
