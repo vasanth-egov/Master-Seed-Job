@@ -2,7 +2,7 @@ import jenkins.model.*
 import hudson.plugins.git.*
 import Templates.*
 import Model.*
-import com.cloudbees.hudson.plugins.folder.Folder
+//import com.cloudbees.hudson.plugins.folder.Folder
 
 //###############################
 def config = [
