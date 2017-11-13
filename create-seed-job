@@ -12,9 +12,10 @@ def config = [
 
 try {
     node {
-      model = load("Model/seed-job.groovy")
-      model.scmCheckout()
-      model.createSeedJob()
-      model.createDockerTemplate()
-      model.publish()
+	      model = load("Model/seed-job.groovy")
+	      model.scmCheckout()
+	      model.createSeedJob()
+	      model.createDockerTemplate()
+	      model.publish()
+      }
 }
