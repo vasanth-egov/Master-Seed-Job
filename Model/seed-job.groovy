@@ -1,3 +1,7 @@
+import jenkins.model.*
+import hudson.plugins.git.*
+import com.cloudbees.hudson.*
+
 def createSeedJob(moduleName,serviceName,gitRepoUrl)
 {
 	stage("Create-Seed-Job")
