@@ -10,7 +10,6 @@ def createDockerTemplate () {
 	stage '\u278C Create Pipeline Template'
 }
 
-def publish() {}
-{
+def publish() {
 	stage '\u278D Publish to SCM'
 }
