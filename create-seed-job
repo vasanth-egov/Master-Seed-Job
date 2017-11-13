@@ -1,0 +1,20 @@
+import jenkins.model.*
+import hudson.plugins.git.*
+import Templates.*
+import Model.*
+import com.cloudbees.hudson.plugins.folder.Folder
+
+//###############################
+def config = [
+        moduleName:"${env.MODULE_NAME}", 
+        serviceName:"${env.SERVICE_NAME}", 
+        gitRepoUrl:"${env.GITHUB_URL}"]
+
+try {
+    node("slave"){
+      model = load("Model/seed-job.groovy")
+      model.scmCheckout()
+      model.createSeedJob()
+      model.createDockerTemplate()
+      model.publish()
+}
