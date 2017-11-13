@@ -1,10 +1,10 @@
-def createSeedJob(moduleName) {
+def createSeedJob(moduleName){
 	stage("Create Seed Job"){
 			sh "echo ${moduleName}"
 	}
 }
 
-def createDockerTemplate(moduleName) {
+def createDockerTemplate(moduleName){
 	stage("Create Pipeline Template"){
 		sh "echo  ${moduleName}"
 	}
