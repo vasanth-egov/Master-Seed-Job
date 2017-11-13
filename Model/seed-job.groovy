@@ -1,21 +1,21 @@
 def createSeedJob (moduleName) {
 	stage ("Create Seed Job")
 	{
-			println "${moduleName}"
+			sh "echo ${moduleName}"
 	}
 }
 
 def createDockerTemplate (moduleName) {
 	stage ("Create Pipeline Template")
 	{
-		println "${moduleName}"
+		sh "echo  ${moduleName}"
 	}
 }
 
 def publish(moduleName) {
 	stage ("Publish to SCM")
 	{
-		println "${moduleName}"
+		sh "echo ${moduleName}"
 	}
 }
 
