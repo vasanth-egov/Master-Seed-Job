@@ -15,13 +15,13 @@ def createSeedJob(moduleName,serviceName,gitRepoUrl)
 		scm.branches = [new BranchSpec("*/master")];
 		def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
 		def parent = Jenkins.instance
-		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, JOB_NAME)
+		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "${serviceName}")
 		job.definition = flowDefinition
 		parent.reload()
 	}
 }
 
-def createDockerTemplate(def moduleName)
+def createDockerTemplate(moduleName,serviceName,gitRepoUrl)
 {
 	stage("Create-Pipeline-Template")
 	{
