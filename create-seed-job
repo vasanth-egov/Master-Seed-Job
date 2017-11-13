@@ -1,8 +1,6 @@
 import jenkins.model.*
 import hudson.plugins.git.*
-import Templates.*
-import Model.*
-//import com.cloudbees.hudson.plugins.folder.Folder
+import com.cloudbees.hudson.*
 
 //###############################
 def config = [
@@ -11,10 +9,10 @@ def config = [
         gitRepoUrl:"${env.GITHUB_URL}"]
 
 node {
-	  stage '\u278A\nSCM Checkout'
+	  stage 'SCM Checkout'
 	  checkout scm
       model = load("Model/seed-job.groovy")
-      model.createSeedJob("${config.moduleName}")
+      model.createSeedJob("${config.moduleName}","${config.serviceName}","${config.gitRepoUrl}")
       model.createDockerTemplate("${config.moduleName}")
       model.publishGithub("${config.moduleName}")
 }
