@@ -1,3 +1,8 @@
+import jenkins.model.*
+import hudson.plugins.git.*
+import com.cloudbees.hudson.*
+
+//###############################
 def config = [
         moduleName:"${env.MODULE_NAME}", 
         serviceName:"${env.SERVICE_NAME}", 
@@ -6,8 +11,27 @@ def config = [
 node {
 	  stage 'SCM Checkout'
 	  checkout scm
+	  stage("Create-Seed-Job")
+		{
+		// Folder Create If not exists
+		jenkins = jenkins.model.Jenkins.instance
+		def folder = jenkins.getItemByFullName("${config.moduleName"}")
+		if (folder == null) {
+		  println "Creating Folder -- ${config.moduleName} ..!!"
+		  def jenkinsInstance = Jenkins.getInstance()
+		  folder = jenkinsInstance.createProject(com.cloudbees.hudson.Folder.class, "${config.moduleName}")
+		}
+		// Job Create
+		def scm = new hudson.plugins.git.GitSCM("${config.gitRepoUrl}")
+		scm.branches = [new hudson.plugins.git.GitSCM.BranchSpec("*/master")];
+		def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
+		def parent = jenkins.model.Jenkins.instance
+		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "${config.serviceName}")
+		job.definition = flowDefinition
+		parent.reload()
+		}
       model = load("Model/seed-job.groovy")
-      model.createSeedJob("${config.moduleName}","${config.serviceName}","${config.gitRepoUrl}")
+      //model.createSeedJob("${config.moduleName}","${config.serviceName}","${config.gitRepoUrl}")
       model.createDockerTemplate("${config.moduleName}")
       model.publishGithub("${config.moduleName}")
 }
