@@ -14,7 +14,7 @@ node {
 	  stage '\u278A SCM Checkout'
 	  checkout scm
       model = load("Model/seed-job.groovy")
-      model.createSeedJob("${config.moduleName}")
-      model.createDockerTemplate("${config.moduleName}")
-      model.publish("${config.moduleName}")
+      model.createSeedJob(config.moduleName)
+      model.createDockerTemplate(config.moduleName)
+      model.publish(config.moduleName)
 }
