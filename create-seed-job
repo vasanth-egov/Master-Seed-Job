@@ -11,7 +11,7 @@ def config = [
         gitRepoUrl:"${env.GITHUB_URL}"]
 
 try {
-    node("slave"){
+    node {
       model = load("Model/seed-job.groovy")
       model.scmCheckout()
       model.createSeedJob()
