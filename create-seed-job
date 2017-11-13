@@ -10,12 +10,10 @@ def config = [
         serviceName:"${env.SERVICE_NAME}", 
         gitRepoUrl:"${env.GITHUB_URL}"]
 
-try {
-    node {
-	      model = load("Model/seed-job.groovy")
-	      model.scmCheckout()
-	      model.createSeedJob()
-	      model.createDockerTemplate()
-	      model.publish()
-      }
+node {
+      model = load("Model/seed-job.groovy")
+      model.scmCheckout()
+      model.createSeedJob()
+      model.createDockerTemplate()
+      model.publish()
 }
