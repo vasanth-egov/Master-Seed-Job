@@ -1,0 +1,34 @@
+jenkins {
+...
+  // NOTE: This will only work 1 folder deep.  TODO: Follow pattern for 2+ deep version. 
+  def defaultServiceOverrides = { folder, jobName ->
+    return {
+      create = ["uri": "/jenkins/job/${folder}/createItem", params: [ name: "${jobName}" ] ]
+      update = ["uri": "/jenkins/job/${folder}/job/${jobName}/config.xml"]
+      get = ["uri": "/jenkins/job/${folder}/job/${jobName}/config.xml"]
+      delete = ["uri": "/jenkins/job/${folder}/job/${jobName}/doDelete"]
+    }
+  }
+...
+  dsl {
+    // Ensure folder is present for subsequent job building.
+    // NOTE: job-dsl folder command does not work in
+    // jobs { jobName { dsl { folder <- doesn't work }}} construct
+    // so need to leave it separate top-level dsl config here.
+    //
+    folder("${folderName}") {
+      description('EDIF sample data extraction effort.')
+    }
+  }
+
+...
+
+  jobs {
+    "${jobName}" {
+      dsl fileTree('.').include("${jobName}.groovy")
+      // place job in appropriate folder.  gradle jenkins plugin doesn't support
+      // job-dsl job command with folder in the name like foo/bar.
+      // Use serviceOverrides as a workaround.
+      serviceOverrides defaultServiceOverrides(folderName, jobName)
+    }
+  }
