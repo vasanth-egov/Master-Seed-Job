@@ -1,17 +1,23 @@
-def createSeedJob(def moduleName){
-	stage("Create-Seed-Job"){
+def createSeedJob(def moduleName)
+{
+	stage("Create-Seed-Job")
+	{
 			sh "echo ${moduleName}"
 	}
 }
 
-def createDockerTemplate(def moduleName){
-	stage("Create-Pipeline-Template"){
+def createDockerTemplate(def moduleName)
+{
+	stage("Create-Pipeline-Template")
+	{
 		sh "echo  ${moduleName}"
 	}
 }
 
-def publish(def moduleName){
-	stage("Publish-to-SCM"){
+def publishGithub(def moduleName)
+{
+	stage("Publish-to-SCM")
+	{
 		sh "echo ${moduleName}"
 	}
 }
