@@ -13,7 +13,7 @@ def config = [
 node {
 	  checkout scm
       model = load("Model/seed-job.groovy")
-      model.scmCheckout()
+      model.gitScmCheckout()
       model.createSeedJob()
       model.createDockerTemplate()
       model.publish()

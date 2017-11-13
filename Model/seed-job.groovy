@@ -1,4 +1,4 @@
-def scmCheckout() {
+def gitScmCheckout() {
 	stage '\u278A SCM Checkout'
 }
 
