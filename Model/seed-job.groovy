@@ -1,24 +1,20 @@
-import jenkins.model.*
-import hudson.plugins.git.*
-import com.cloudbees.hudson.*
-
 def createSeedJob(moduleName,serviceName,gitRepoUrl)
 {
 	stage("Create-Seed-Job")
 	{
 		// Folder Create If not exists
-		jenkins = Jenkins.instance
+		jenkins = jenkins.model.Jenkins.instance
 		def folder = jenkins.getItemByFullName(moduleName)
 		if (folder == null) {
 		  println "Creating Folder -- ${moduleName} ..!!"
 		  def jenkinsInstance = Jenkins.getInstance()
-		  folder = jenkinsInstance.createProject(Folder.class, moduleName)
+		  folder = jenkinsInstance.createProject(com.cloudbees.hudson.Folder.class, moduleName)
 		}
 		// Job Create
-		def scm = new GitSCM(gitRepoUrl)
+		def scm = new hudson.plugins.git.GitSCM(gitRepoUrl)
 		scm.branches = [new BranchSpec("*/master")];
 		def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
-		def parent = Jenkins.instance
+		def parent = jenkins.model.Jenkins.instance
 		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "${serviceName}")
 		job.definition = flowDefinition
 		parent.reload()
