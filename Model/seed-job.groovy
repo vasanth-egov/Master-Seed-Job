@@ -12,7 +12,7 @@ def createSeedJob(moduleName,serviceName,gitRepoUrl)
 		}
 		// Job Create
 		def scm = new hudson.plugins.git.GitSCM(gitRepoUrl)
-		scm.branches = [new BranchSpec("*/master")];
+		scm.branches = [new hudson.plugins.git.GitSCM.BranchSpec("*/master")];
 		def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
 		def parent = jenkins.model.Jenkins.instance
 		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "${serviceName}")
