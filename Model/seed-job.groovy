@@ -1,15 +1,11 @@
-def gitScmCheckout() {
-	stage '\u278A SCM Checkout'
-}
-
-def createSeedJob () {
+def createSeedJob (moduleName) {
 	stage '\u278B Create Seed Job'
 }
 
-def createDockerTemplate () {
+def createDockerTemplate (moduleName) {
 	stage '\u278C Create Pipeline Template'
 }
 
-def publish() {
+def publish(moduleName) {
 	stage '\u278D Publish to SCM'
 }

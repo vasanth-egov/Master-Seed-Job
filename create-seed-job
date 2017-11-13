@@ -11,10 +11,10 @@ def config = [
         gitRepoUrl:"${env.GITHUB_URL}"]
 
 node {
+	  stage '\u278A SCM Checkout'
 	  checkout scm
       model = load("Model/seed-job.groovy")
-      model.gitScmCheckout()
-      model.createSeedJob()
-      model.createDockerTemplate()
-      model.publish()
+      model.createSeedJob("${config.moduleName")
+      model.createDockerTemplate("${config.moduleName")
+      model.publish("${config.moduleName")
 }
