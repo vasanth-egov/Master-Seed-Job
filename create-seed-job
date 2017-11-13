@@ -22,13 +22,7 @@ node {
 		  folder = jenkinsInstance.createProject(com.cloudbees.hudson.Folder.class, "${config.moduleName}")
 		}
 		// Job Create
-		def scm = new hudson.plugins.git.GitSCM("${config.gitRepoUrl}")
-		scm.branches = [new BranchSpec("*/master")];
-		def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
-		def parent = jenkins.model.Jenkins.instance
-		def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "${config.serviceName}")
-		job.definition = flowDefinition
-		parent.reload()
+		
 		}
       model = load("Model/seed-job.groovy")
       //model.createSeedJob("${config.moduleName}","${config.serviceName}","${config.gitRepoUrl}")
