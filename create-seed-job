@@ -15,7 +15,7 @@ node {
 		{
 		// Folder Create If not exists
 		jenkins = jenkins.model.Jenkins.instance
-		def folder = jenkins.getItemByFullName("${config.moduleName"}")
+		def folder = jenkins.getItemByFullName("${config.moduleName}")
 		if (folder == null) {
 		  println "Creating Folder -- ${config.moduleName} ..!!"
 		  def jenkinsInstance = Jenkins.getInstance()
