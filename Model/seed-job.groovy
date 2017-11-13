@@ -14,3 +14,5 @@ def publish(moduleName) {
 		println moduleName
 
 }
+
+return this;
