@@ -29,3 +29,4 @@ node {
       model.createDockerTemplate("${config.moduleName}")
       model.publishGithub("${config.moduleName}")
 }
+
